@@ -5,3 +5,5 @@ __pycache__/
 .idea/
 
 db.sqlite3
+
+provisioning/node_modules/
