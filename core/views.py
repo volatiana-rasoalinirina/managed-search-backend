@@ -35,3 +35,23 @@ class UploadFileView(APIView):
         return Response({
             'search_url': search_url
         }, status=201)
+
+class SearchView(APIView):
+
+    def get(self, request, index_name):
+        query = request.data.get('query')
+        if not query:
+            return Response({'error': 'No query provided'})
+        search_body = {
+            'query': {
+                'multi_match': {
+                    'query': query,
+                    'fields': ['*']
+                }
+            }
+        }
+        try:
+            result = ES_CLIENT.search(index=index_name, body=search_body)
+            return Response(result['hits']['hits'])
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
