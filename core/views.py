@@ -33,13 +33,14 @@ class UploadFileView(APIView):
         # return the success response which is the search url
         search_url = f"/api/search/{index_name}/"
         return Response({
-            'search_url': search_url
+            'search_url': search_url,
+            'index_name': index_name,
         }, status=201)
 
 class SearchView(APIView):
 
     def get(self, request, index_name):
-        query = request.data.get('query')
+        query = request.query_params.get('q', None)
         if not query:
             return Response({'error': 'No query provided'})
         search_body = {

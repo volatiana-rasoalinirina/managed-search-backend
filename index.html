@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Managed Search Project</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 800px; margin: 40px auto; color: #333; }
+        .section { border: 1px solid #e0e0e0; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h1, h2 { color: #1a1a1a; }
+        input[type="file"], input[type="text"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; min-width: 250px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background-color: #0056b3; }
+        #upload-status { margin-top: 15px; font-weight: bold; }
+        #results-container { background-color: #f9f9f9; padding: 15px; border-radius: 4px; min-height: 50px; }
+        pre { white-space: pre-wrap; word-wrap: break-word; background-color: #fff; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Créez votre propre API de recherche</h1>
+
+    <!-- UPLOAD SECTION -->
+    <div class="section" id="upload-section">
+        <h2>Étape 1 : Téléversez un fichier CSV</h2>
+        <input type="file" id="csv-file" accept=".csv">
+        <button id="upload-btn">Téléverser et Indexer</button>
+        <p id="upload-status"></p>
+    </div>
+
+    <!-- SEARCH SECTION-->
+    <div class="section" id="search-section" style="display:none;">
+        <h2>Étape 2 : Testez votre API de recherche</h2>
+        <p><strong>Votre point de terminaison de recherche :</strong> <code id="endpoint-url"></code></p>
+        <input type="text" id="search-query" placeholder="Entrez votre recherche ici...">
+        <button id="search-btn">Rechercher</button>
+    </div>
+
+    <!-- RESULTS SECTION -->
+    <div class="section" id="results-section" style="display:none;">
+        <h2>Résultats</h2>
+        <div id="results-container"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

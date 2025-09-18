@@ -2,6 +2,7 @@ asgiref==3.9.1
 certifi==2025.8.3
 charset-normalizer==3.4.3
 Django==5.2.6
+django-cors-headers==4.9.0
 django-extensions==4.1
 djangorestframework==3.16.1
 elastic-transport==8.17.1
