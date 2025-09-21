@@ -8,6 +8,8 @@ djangorestframework==3.16.1
 elastic-transport==8.17.1
 elasticsearch==8.15.1
 idna==3.10
+psycopg2-binary==2.9.10
+python-decouple==3.8
 requests==2.32.5
 sqlparse==0.5.3
 urllib3==2.5.0

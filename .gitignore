@@ -7,3 +7,5 @@ __pycache__/
 db.sqlite3
 
 provisioning/node_modules/
+
+.env
