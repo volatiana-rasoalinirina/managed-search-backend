@@ -12,6 +12,7 @@ ES_CLIENT = Elasticsearch(hosts=[{'host': 'localhost', 'port': 9200, 'scheme': '
 class UploadFileView(APIView):
 
     def post(self, request):
+        # Create Elastic search index
         try:
             index_name = secrets.token_hex(6)
             ES_CLIENT.indices.create(index=index_name)
