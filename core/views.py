@@ -1,4 +1,6 @@
 import csv
+import secrets
+
 import requests
 
 from rest_framework.views import APIView
@@ -6,18 +8,15 @@ from rest_framework.response import Response
 
 from elasticsearch import helpers, Elasticsearch
 
-PROVISIONING_URL = 'http://localhost:3001/provision-index'
 ES_CLIENT = Elasticsearch(hosts=[{'host': 'localhost', 'port': 9200, 'scheme': 'http'}])
 class UploadFileView(APIView):
 
     def post(self, request):
-        # Call provisioning service for creating index
-        response = requests.post(PROVISIONING_URL)
-        data = response.json()
-        if data['status'] == 'SUCCESS':
-            index_name = data['index_name']
-        else:
-            return Response({'error': 'Provisioning servie failed'}) # XXX: Improve this !
+        try:
+            index_name = secrets.token_hex(6)
+            ES_CLIENT.indices.create(index=index_name)
+        except Exception as e:
+            return Response({'error': f'Failed to create Elasticsearch index: {str(e)}'}, status=500)
         # Index the data from the request csv file
         csv_file = request.FILES['file']
         if not csv_file:
