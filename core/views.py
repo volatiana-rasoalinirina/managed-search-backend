@@ -8,7 +8,11 @@ from rest_framework.response import Response
 
 from elasticsearch import helpers, Elasticsearch
 
-ES_CLIENT = Elasticsearch(hosts=[{'host': 'localhost', 'port': 9200, 'scheme': 'http'}])
+from decouple import config
+
+ES_CLOUD_ID = config('ES_CLOUD_ID')
+ES_PASSWORD = config('ES_PASSWORD')
+ES_CLIENT = Elasticsearch(cloud_id=ES_CLOUD_ID, basic_auth=('elastic', ES_PASSWORD))
 class UploadFileView(APIView):
 
     def post(self, request):
